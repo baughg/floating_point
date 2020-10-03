@@ -4,9 +4,9 @@
 
 namespace GB {
 	struct float32 {
-		int32_t fraction : 23;
-		int32_t exponent : 8;
-		int32_t sign : 1;
+		uint32_t fraction : 23;
+		uint32_t exponent : 8;
+		uint32_t sign : 1;
 	};
 
 	union fp32 {

@@ -11,8 +11,8 @@ FloatULP::FloatULP()
 
 
 float FloatULP::float_from_bitfield(const fp32 &a) {
-	int32_t exp{ 1 << (a.bitfield.exponent - 127) };
-	const int32_t sign{ a.bitfield.sign ? -1 : 1 };
+	int64_t exp{ 1 << (static_cast<uint32_t>(a.bitfield.exponent) - 127U) };
+	const int64_t sign{ a.bitfield.sign ? -1 : 1 };
 
 	uint32_t fraction{ static_cast<uint32_t>(a.bitfield.fraction) };
 	uint32_t max_frac{};
@@ -40,8 +40,10 @@ float FloatULP::float_from_bitfield(const fp32 &a) {
 
 	exp *= sign;
 
-	int32_t numerator{ static_cast<int32_t>(num) * exp };
+	int64_t numerator{ static_cast<int64_t>(num) * exp };
+	exp <<= max_shift;
+	numerator += exp;
 	double frac{ static_cast<double>(numerator) / static_cast<double>(1 << max_shift) };
-	frac += static_cast<double>(exp);
+	//frac += static_cast<double>(exp);
 	return static_cast<float>(frac);
 }
