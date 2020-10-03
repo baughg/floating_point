@@ -23,8 +23,8 @@ namespace GB {
 		float float_from_bitfield(const fp32 &a);
 	private:
 		fp32 number_{};
-		std::vector<uint32_t> fraction_denom_;
-		std::vector<uint32_t> fraction_numer_;
+		std::vector<int32_t> fraction_denom_;
+		std::vector<int32_t> fraction_numer_;
 	};
 }
 
